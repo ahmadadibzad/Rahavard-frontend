@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title mt-2 mb-4">افزودن کارمند جدید</h5>
+
+            <form (submit)="submit()">
+                <div class="mb-3">
+                    <label class="form-label">شماره پرسنلی</label>
+                    <input type="text" class="form-control" [(ngModel)]="form.personnelCode" name="personnelCode">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">نام</label>
+                    <input type="text" class="form-control" [(ngModel)]="form.firstName" name="firstName">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">نام خانوادگی</label>
+                    <input type="text" class="form-control" [(ngModel)]="form.lastName" name="lastName">
+                </div>
+
+                <button type="button" class="btn btn-secondary" (click)="addInput()">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <br>
+                <br>
+
+                @for (item of form.customFieldValuesDto; track $index) {
+                <div class="row g-3 mt-2">
+                    <div class="col-auto">
+                        <label class="form-label">نام نمایشی</label>
+                        <input type="text" class="form-control"
+                            [(ngModel)]="form.customFieldValuesDto[$index].displayName" [name]="'displayName' + $index">
+                    </div>
+                    <div class="col-auto">
+                        <label class="form-label">نوع</label>
+                        <select class="form-select" aria-label="انتخاب کنید"
+                            [(ngModel)]="form.customFieldValuesDto[$index].customFieldId" [value]="1"
+                            (ngModelChange)="customFieldChange($index)" [name]="'customFieldId' + $index">
+                            @for (cf of customFieldsList; track cf.id) {
+                            <option [value]="cf.id">{{cf.name}}</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-auto" [ngSwitch]="fieldType[selectedFieldType[$index]!]">
+                        <label class="form-label">مقدار</label>
+                        <input type="text" class="form-control" [(ngModel)]="form.customFieldValuesDto[$index].value"
+                            [name]="'value' + $index" *ngSwitchCase="fieldType.String">
+                        <input type="number" class="form-control" [(ngModel)]="form.customFieldValuesDto[$index].value"
+                            [name]="'value' + $index" *ngSwitchCase="fieldType.Numeric">
+                        <input type="date" class="form-control" [(ngModel)]="form.customFieldValuesDto[$index].value"
+                            [name]="'value' + $index" *ngSwitchCase="fieldType.DateTime">
+                    </div>
+                    <div class="col-auto">
+                        <label class="form-label">نام فرمول</label>
+                        <input type="text" class="form-control" [(ngModel)]="form.customFieldValuesDto[$index].formula"
+                            [name]="'formula' + $index">
+                    </div>
+                </div>
+                }
+                <br>
+                <br>
+
+                <button type="submit" class="btn btn-primary">افزودن</button>
+            </form>
+        </div>
+    </div>
+</div>

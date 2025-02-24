@@ -1,0 +1,4 @@
+.nav-link:focus,
+.nav-link:hover {
+    color: rgba(var(--bs-link-color-rgb), var(--bs-link-underline-opacity, 1)) !important;
+}

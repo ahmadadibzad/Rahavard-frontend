@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">تعریف مشخصه های سفارشی</h5>
+            <p class="card-text">در این بخش می توانید فیلدهای سفارشی خود را ایجاد و از آن در فرم ها استفاده کنید</p>
+
+            <form [formGroup]=" form" (submit)="add()">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">نام فیلد</label>
+                    <input type="text" class="form-control" formControlName="name">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">نوع فیلد</label>
+                    <select class="form-select" aria-label="انتخاب کنید" formControlName="type">
+                        <option value="1" selected>رشته</option>
+                        <option value="2">عدد</option>
+                        <option value="3">تاریخ</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">ایجاد</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-5">
+        <div class="card-body">
+            <h5 class="card-title">مشخصه های تعریف شده</h5>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">شماره</th>
+                        <th scope="col">نام</th>
+                        <th scope="col">نوع</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of list; track item.id) {
+                    <tr>
+                        <th scope="row">{{item.id}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.type}}</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

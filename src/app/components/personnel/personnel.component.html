@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-body">
+            <a class="btn btn-primary btn-sm mt-2 mb-3" [routerLink]="['/add-personnel']"><i class="fas fa-plus"></i>
+                افزودن کارمند جدید</a>
+            <h5 class="card-title">لیست کارکنان</h5>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">شماره</th>
+                        <th scope="col">نام</th>
+                        <th scope="col">نام خانوادگی</th>
+                        <th scope="col">شماره پرسنلی</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of list; track item.id) {
+                    <tr>
+                        <th scope="row">{{item.id}}</th>
+                        <td>{{item.firstName}}</td>
+                        <td>{{item.lastName}}</td>
+                        <td>{{item.personnelCode}}</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
